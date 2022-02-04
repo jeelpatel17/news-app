@@ -1,15 +1,28 @@
 // FETCHING THE NEWS
-let pageNo = 1;
+let topics = [
+  "breaking-news",
+  "world",
+  "nation",
+  "business",
+  "technology",
+  "entertainment",
+  "sports",
+  "science",
+  "health",
+];
+let topicNo = 0;
 let fetchNews = async () => {
   const apiKey = "548bc59c45643ef429411963c536c34a";
   let req = await fetch(
-    `https://gnews.io/api/v4/search?q=bitcoin&page=${pageNo}&token=${apiKey}`
+    `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`
   );
   //
-  // console.log();
   let res = await req.json();
-  console.log(res);
-  pageNo++;
+  if (topicNo == topics.length) {
+    topicNo = 0;
+  }
+  console.log(topics[topicNo]);
+  topicNo++;
   let parent = document.getElementById("parent");
   res.articles.forEach((elem) => {
     let publishDate = new Date(elem.publishedAt).toLocaleDateString("id");
@@ -31,7 +44,6 @@ setTimeout(() => {
     .querySelectorAll("#thumbnailImg")
     .forEach((e) => (e.style.filter = "unset"));
 }, 3000);
-// document.getElementById("thumbnailImg").style.filter = "blur(5px);";
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
   if (clientHeight + scrollTop == scrollHeight) {
