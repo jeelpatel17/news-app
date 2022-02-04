@@ -27,10 +27,10 @@ let fetchNews = async () => {
   res.articles.forEach((elem) => {
     let publishDate = new Date(elem.publishedAt).toLocaleDateString("id");
     parent.innerHTML += `
-        <div class="card my-3 mx-auto">
+        <div class="card">
       <img src="${elem.image}" id="thumbnailImg" class="card-img-top" alt="[Image]" loading="lazy"/>
       <div class="card-body">
-        <h5 class="card-title fw-bold">${elem.title} <span class="badge rounded-pill bg-secondary">${elem.source.name}</span></h5>
+        <h5 class="card-title">${elem.title} <span class="badge rounded-pill bg-secondary">${elem.source.name}</span></h5>
         <p class="publishDate">Published: ${publishDate}</p>
         <p class="card-text">${elem.content}</p>
         <a href="${elem.url}" class="btn btn-primary">Read Full Article</a>
