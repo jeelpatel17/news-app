@@ -37,13 +37,13 @@ let fetchNews = async () => {
       </div>
     </div>`;
   });
+  setTimeout(() => {
+    document
+      .querySelectorAll("#thumbnailImg")
+      .forEach((e) => (e.style.filter = "unset"));
+  }, 3000);
 };
 fetchNews();
-setTimeout(() => {
-  document
-    .querySelectorAll("#thumbnailImg")
-    .forEach((e) => (e.style.filter = "unset"));
-}, 3000);
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
   if (clientHeight + scrollTop == scrollHeight) {
