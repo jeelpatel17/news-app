@@ -12,7 +12,7 @@ let topics = [
 ];
 let topicNo = 0;
 let fetchNews = async () => {
-  const apiKey = "548bc59c45643ef429411963c536c34a";
+  const apiKey = "9fc5a37c33fd19692709331c286cbb60";
   let req = await fetch(
     `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`
   );
@@ -21,10 +21,11 @@ let fetchNews = async () => {
   if (topicNo == topics.length) {
     topicNo = 0;
   }
-  console.log(topics[topicNo]);
+  // console.log(topics[topicNo]);
   topicNo++;
   let parent = document.getElementById("parent");
   res.articles.forEach((elem) => {
+    // console.log();
     let publishDate = new Date(elem.publishedAt).toLocaleDateString("id");
     parent.innerHTML += `
     <div class="card">
@@ -40,12 +41,15 @@ let fetchNews = async () => {
     <div class="card-body">
       <h3 class="card-title">
         ${elem.title}
-        <span class="badge rounded-pill bg-secondary"
+        <span class="badge"
           >${elem.source.name}</span
         >
       </h3>
       <p class="publishDate">Published: ${publishDate}</p>
-      <p class="card-text">${elem.content}</p>
+      <p class="card-text">${elem.content.slice(
+        0,
+        elem.content.length - 12
+      )}</p>
       <a href="${elem.url}" class="btn">Read Full Article</a>
     </div>
   </div>`;
@@ -59,7 +63,9 @@ let fetchNews = async () => {
 fetchNews();
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (clientHeight + scrollTop == scrollHeight) {
+  console.log("Scroll height: ", scrollHeight);
+  if (clientHeight + (scrollTop + 200) >= scrollHeight) {
+    console.log("true");
     fetchNews();
   }
 });
