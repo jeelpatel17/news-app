@@ -66,9 +66,9 @@ let fetchNews = async () => {
 fetchNews();
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  console.log("Scroll height: ", scrollHeight);
+  // console.log("Scroll height: ", scrollHeight);
   if (clientHeight + (scrollTop + 200) >= scrollHeight) {
-    console.log("true");
+    // console.log("true");
     fetchNews();
   }
 });
