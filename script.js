@@ -14,7 +14,10 @@ let topicNo = 0;
 let fetchNews = async () => {
   const apiKey = "9fc5a37c33fd19692709331c286cbb60";
   let req = await fetch(
-    `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`
+    `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`,
+    {
+      "Content-Security-Policy": "default-src https://gnews.io",
+    }
   );
   //
   let res = await req.json();
