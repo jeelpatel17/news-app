@@ -14,7 +14,10 @@ let topicNo = 0;
 let fetchNews = async () => {
   const apiKey = process.env.NEWS_API_KEY;
   let req = await fetch(
-    `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`
+    `https://gnews.io/api/v4/top-headlines?topic=${topics[topicNo]}&lang=en&token=${apiKey}`,
+    {
+      "Content-Security-Policy": "default-src https://gnews.io",
+    }
   );
   //
   let res = await req.json();
@@ -63,9 +66,9 @@ let fetchNews = async () => {
 fetchNews();
 window.addEventListener("scroll", () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  console.log("Scroll height: ", scrollHeight);
+  // console.log("Scroll height: ", scrollHeight);
   if (clientHeight + (scrollTop + 200) >= scrollHeight) {
-    console.log("true");
+    // console.log("true");
     fetchNews();
   }
 });
